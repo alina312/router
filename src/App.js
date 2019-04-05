@@ -1,26 +1,22 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, Component } from "react";
+import IndexPage from "./page/index";
+import AboutPage from "./page/about";
+import CatalogPage from "./page/catalog";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router><Fragment>
+        <Route path="/" exact component={IndexPage} />
+        <Route path="/about" component={AboutPage} />
+        <Route path="/contacts" render={({match}) => {
+          console.log(match.par);
+          return <h1>Contacts</h1>
+        }} />
+        <Route path="/catalog/:category_slug?" component={CatalogPage} />
+      </Fragment></Router>
     );
   }
 }
